@@ -121,9 +121,7 @@ function Price({
           <s>{data.previousPrice}</s>
         </span>
       )}
-      <strong>
-        {hasPrevious ? `HOJE, TUDO POR ${data.cashValue}` : data.cashValue}
-      </strong>
+      <strong>{data.cashValue}</strong>
       <span>
         {data.paymentType ||
           (data.installmentCount && data.installmentCount > 1 && data.installmentValue
@@ -342,12 +340,12 @@ function UpgradeModal({
         </button>
         {offers.popup.eyebrow ? <span className="eyebrow">{offers.popup.eyebrow}</span> : null}
         {offers.popup.message ? <p className="mt-2 text-[var(--text-muted)]">{offers.popup.message}</p> : null}
-        <h2 id="modal-title" className="modal-title">
+        <h2 id="modal-title">
           {offers.popup.title}
         </h2>
         <FeatureList items={offers.complete.items} />
         <Price data={offers.popup} />
-        <div className="modal-actions">
+        <div className="mt-4">
           <Button
             id="btn-upgrade-modal-cta"
             href={links.checkoutUpgrade ? withAttributionParams(links.checkoutUpgrade) : undefined}
