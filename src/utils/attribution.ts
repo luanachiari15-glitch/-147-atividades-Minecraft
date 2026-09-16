@@ -8,31 +8,51 @@ type Attribution = Partial<Record<(typeof ATTRIBUTION_PARAMS)[number], string>>
 
 const readStoredAttribution = (): Attribution => {
   try {
-    return JSON.parse(window.localStorage.getItem(ATTRIBUTION_KEY) || '{}') as Attribution
+    const raw = window.localStorage.getItem(ATTRIBUTION_KEY)
+    if (!raw) return {}
+    const parsed = JSON.parse(raw)
+    if (!parsed || typeof parsed !== 'object') return {}
+    
+    // Sanitize to only known string params
+    const sanitized: Attribution = {}
+    ATTRIBUTION_PARAMS.forEach((param) => {
+      if (typeof parsed[param] === 'string') {
+        sanitized[param] = parsed[param]
+      }
+    })
+    return sanitized
   } catch {
     return {}
   }
 }
 
 export function captureAttributionParams() {
-  const current = new URLSearchParams(window.location.search)
-  const attribution = readStoredAttribution()
-  let changed = false
+  try {
+    const current = new URLSearchParams(window.location.search)
+    const attribution = readStoredAttribution()
+    let changed = false
 
-  ATTRIBUTION_PARAMS.forEach(param => {
-    const value = current.get(param)
-    if (value) {
-      attribution[param] = value
-      changed = true
-    }
-  })
+    ATTRIBUTION_PARAMS.forEach(param => {
+      const value = current.get(param)
+      if (value && typeof value === 'string') {
+        attribution[param] = value
+        changed = true
+      }
+    })
 
-  if (changed) {
-    try {
-      window.localStorage.setItem(ATTRIBUTION_KEY, JSON.stringify(attribution))
-    } catch {
-      // A página continua funcional quando o navegador bloqueia armazenamento local.
+    if (changed) {
+      // Build plain primitive key-value map before saving
+      const payload: Record<string, string> = {}
+      ATTRIBUTION_PARAMS.forEach(param => {
+        const val = attribution[param]
+        if (typeof val === 'string') {
+          payload[param] = val
+        }
+      })
+      window.localStorage.setItem(ATTRIBUTION_KEY, JSON.stringify(payload))
     }
+  } catch {
+    // A página continua funcional quando o navegador bloqueia armazenamento local.
   }
 }
 
