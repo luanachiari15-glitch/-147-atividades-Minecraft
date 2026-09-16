@@ -1,0 +1,457 @@
+@import "tailwindcss";
+
+:root {
+  /* Paleta Inspirada no Universo Minecraft */
+  --blue-sky: #2389C4;
+  --blue-deep: #176B9E;
+  --blue-navy: #071D30;
+  --green-mc: #22A447;
+  --green-mc-dark: #187D36;
+  --green-light: #8BC34A;
+  --yellow-gold: #F5C542;
+  --red-urgency: #E74732;
+  --bg-ice-blue: #EDF7FC;
+  --bg-soft-blue: #F8FCFE;
+  --bg-white: #FFFFFF;
+  --text-navy: #102C41;
+  --text-slate: #557080;
+
+  /* Mapeamento Semântico */
+  --background-page: var(--bg-soft-blue);
+  --background-white: #FFFFFF;
+  --background-section: var(--bg-ice-blue);
+  --background-section-alt: var(--bg-soft-blue);
+  --background-card: #FFFFFF;
+  --background-card-light: var(--bg-ice-blue);
+  --background-control: #FFFFFF;
+  --background-dark: var(--blue-navy);
+  --background-hero: var(--blue-sky);
+  --background-image-placeholder: var(--blue-deep);
+  --background-overlay: rgba(7, 29, 48, 0.75);
+  --placeholder-text: #FFFFFF;
+  --border-soft: #D6E8F2;
+  --border-placeholder: var(--blue-sky);
+  --text-title: var(--text-navy);
+  --text-body: var(--text-navy);
+  --text-muted: var(--text-slate);
+  --text-on-dark: #FFFFFF;
+  --brand-primary: var(--blue-sky);
+  --brand-primary-dark: var(--blue-deep);
+  --brand-primary-light: var(--bg-ice-blue);
+  --cta-color: var(--green-mc);
+  --cta-dark: var(--green-mc-dark);
+  --cta-light: #2ec557;
+
+  font-family: "Bricolage Grotesque", Arial, sans-serif;
+  color: var(--text-body);
+  background: var(--background-page);
+  font-synthesis: none;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  min-width: 0;
+  overflow-x: hidden;
+  background: var(--background-page);
+  color: var(--text-body);
+}
+button, a { font: inherit; }
+button { cursor: pointer; }
+img { display: block; width: 100%; height: 100%; object-fit: cover; }
+
+h1, h2, h3, p { margin-top: 0; }
+h1, h2, h3 { color: var(--text-title); }
+h1 {
+  max-width: 900px;
+  margin: 32px auto 16px;
+  font-family: "Montserrat", sans-serif;
+  font-size: 42px;
+  line-height: 1.2;
+  font-weight: 900;
+  font-style: normal;
+  text-align: center;
+}
+h2 {
+  margin-bottom: 40px;
+  font-family: "Montserrat", sans-serif;
+  font-size: 32px;
+  line-height: 1.4;
+  font-weight: 900;
+  font-style: normal;
+  text-align: center;
+  color: var(--text-title);
+}
+h3 { font-size: 20px; line-height: 1.4; font-weight: 600; color: var(--text-title); }
+p, li { font-size: 16px; line-height: 1.5; color: var(--text-body); }
+
+.container { width: min(100%, 1264px); margin-inline: auto; padding-inline: 32px; }
+.section { padding-block: 96px; background: var(--background-section-alt); }
+.section-muted { background: var(--background-section); }
+.narrow { max-width: 840px; }
+.kicker { margin-bottom: 8px; color: var(--brand-primary-dark); font-weight: 700; text-align: center; }
+
+/* SEÇÃO DE URGÊNCIA - Vermelho para avisos e urgência */
+.urgency {
+  padding: 10px 24px;
+  background: var(--red-urgency);
+  color: #FFFFFF;
+  text-align: center;
+  font-weight: 600;
+}
+
+/* SEÇÃO 1 — HERO: Azul principal céu do Minecraft com textos brancos */
+.hero {
+  padding-block: 64px 96px;
+  background: var(--blue-sky);
+  color: #FFFFFF;
+}
+.hero-inner { display: flex; flex-direction: column; align-items: center; }
+.hero-media { width: min(100%, 1040px); aspect-ratio: 3/2; }
+.hero-media img { object-fit: contain; }
+.hero h1 { color: #FFFFFF; }
+.hero .lead {
+  max-width: 720px;
+  margin-bottom: 32px;
+  font-size: 18px;
+  line-height: 1.5;
+  text-align: center;
+  color: #FFFFFF;
+}
+.lead {
+  max-width: 720px;
+  margin-bottom: 32px;
+  font-size: 18px;
+  line-height: 1.5;
+  text-align: center;
+  color: var(--text-muted);
+}
+.hero-action { width: min(100%, 320px); }
+.hero-action .button { display: flex; width: 100%; }
+.hero-action img {
+  width: 100%;
+  height: auto;
+  margin-top: 12px;
+  object-fit: contain;
+  filter: brightness(0) invert(1);
+  opacity: 0.95;
+}
+
+/* PLACEHOLDERS */
+.placeholder {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  min-height: 180px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 24px;
+  border: 1px solid var(--border-placeholder);
+  background: var(--background-image-placeholder);
+  color: var(--placeholder-text);
+  text-align: center;
+}
+.placeholder span { font-weight: 700; color: #FFFFFF; }
+.placeholder small { opacity: .85; color: var(--bg-ice-blue); }
+
+/* BOTÕES: Verde Minecraft, hover verde mais escuro sem alterar tamanho/posição */
+.button {
+  display: inline-flex;
+  width: fit-content;
+  max-width: 100%;
+  align-items: center;
+  justify-content: center;
+  padding: 20px 40px;
+  border: 0;
+  border-radius: 10px;
+  box-shadow: 0 8px 24px rgba(7, 29, 48, 0.2);
+  background: var(--cta-color);
+  color: #FFFFFF;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1.2;
+  text-align: center;
+  text-decoration: none;
+  transition: background-color .2s ease, box-shadow .2s ease;
+}
+.button:hover {
+  background: var(--cta-dark);
+  box-shadow: 0 8px 24px rgba(7, 29, 48, 0.28);
+  transform: none;
+}
+.button:active {
+  background: var(--cta-dark);
+  transform: none;
+}
+.button-secondary {
+  border: 2px solid var(--brand-primary-dark);
+  background: transparent;
+  box-shadow: none;
+  color: var(--brand-primary-dark);
+  animation: none;
+}
+.button-secondary:hover {
+  background: var(--bg-ice-blue);
+  color: var(--brand-primary-dark);
+  box-shadow: none;
+  transform: none;
+}
+.button:focus-visible, button:focus-visible, a:focus-visible {
+  outline: 3px solid var(--blue-deep);
+  outline-offset: 3px;
+}
+
+/* CARROSSEL */
+.carousel-wrap { position: relative; }
+.carousel {
+  display: grid;
+  grid-auto-columns: calc((100% - 96px)/5);
+  grid-auto-flow: column;
+  gap: 24px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  touch-action: pan-x;
+  -webkit-mask-image: linear-gradient(to right, transparent 0, #000 6%, #000 94%, transparent 100%);
+  mask-image: linear-gradient(to right, transparent 0, #000 6%, #000 94%, transparent 100%);
+}
+.carousel::-webkit-scrollbar { display: none; }
+.result-card {
+  aspect-ratio: 2/3;
+  overflow: hidden;
+  border-radius: 16px;
+  border: 1px solid var(--border-soft);
+}
+.activity-card {
+  aspect-ratio: 3/4;
+  overflow: hidden;
+  border-radius: 16px;
+  border: 1px solid var(--border-soft);
+  background: #FFFFFF;
+  box-shadow: 0 8px 24px rgba(16, 44, 65, 0.06);
+}
+
+/* CARDS & GRIDS */
+.card-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.content-card, .offer-card {
+  overflow: hidden;
+  padding: 24px;
+  border: 1px solid var(--border-soft);
+  border-radius: 16px;
+  background: #FFFFFF;
+  box-shadow: 0 10px 30px rgba(16, 44, 65, 0.05);
+  text-align: left;
+}
+.square-media { aspect-ratio: 1; margin: -24px -24px 24px; }
+.eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 8px;
+  color: var(--brand-primary-dark);
+  font-weight: 700;
+}
+.eyebrow svg { width: 18px; }
+.content-card h3 { margin-bottom: 16px; color: var(--text-title); }
+.content-card p { color: var(--text-muted); }
+.accordion-trigger {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 0;
+  border: 0;
+  border-top: 1px solid var(--border-soft);
+  background: transparent;
+  color: var(--text-title);
+  font-weight: 600;
+  text-align: left;
+  transition: color .2s;
+}
+.accordion-trigger:hover {
+  color: var(--brand-primary-dark);
+}
+.accordion-trigger svg { width: 20px; color: var(--brand-primary-dark); }
+.accordion-panel p { margin: 8px 0 0; color: var(--text-muted); }
+.bonus p { margin-bottom: 16px; }
+.bonus .eyebrow { color: var(--brand-primary-dark); }
+
+/* SEÇÃO 5 — OFERTAS: Seção de alto contraste em Azul-marinho muito escuro */
+#ofertas {
+  background: var(--blue-navy);
+}
+#ofertas h2 {
+  color: #FFFFFF;
+}
+.offers {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 24px;
+  max-width: 960px;
+  margin: auto;
+}
+.offer-card { position: relative; padding: 40px; background: #FFFFFF; }
+.offer-card h3 { margin-bottom: 24px; text-align: center; color: var(--text-title); }
+.offer-card.featured {
+  padding-block: 56px;
+  border: 2px solid var(--yellow-gold);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.25);
+}
+.offer-badge {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  padding: 8px 20px;
+  border-radius: 0 0 10px 10px;
+  transform: translateX(-50%);
+  background: var(--yellow-gold);
+  color: var(--blue-navy);
+  font-weight: 700;
+  white-space: nowrap;
+}
+.feature-list { display: grid; gap: 12px; margin: 0 0 32px; padding: 0; list-style: none; }
+.feature-list li { display: flex; align-items: flex-start; gap: 10px; color: var(--text-title); }
+.feature-list svg { width: 20px; flex: none; color: var(--green-mc); }
+.bonus-value, .bonus > s { color: var(--red-urgency); font-weight: 700; text-decoration-thickness: 2px; }
+.price { display: flex; flex-direction: column; align-items: center; margin: 24px 0; text-align: center; }
+.price-before { white-space: nowrap; color: var(--text-muted); font-size: 15px; }
+.price-before s { margin-right: 4px; color: var(--red-urgency); }
+.price strong { margin-block: 4px; color: var(--text-title); font-size: 42px; line-height: 1.2; }
+.price b { color: var(--text-title); }
+.price span { color: var(--text-muted); }
+.offer-action { width: min(100%, 280px); margin-inline: auto; }
+.offer-action .button { display: flex; width: 100%; }
+.offer-action img { width: 100%; height: auto; margin-top: 12px; object-fit: contain; }
+
+/* SEÇÃO 7 — GARANTIA */
+#guarantee-section { background: var(--bg-soft-blue); }
+.guarantee { display: flex; flex-direction: column; align-items: center; text-align: center; }
+.guarantee-seal { width: min(100%, 480px); height: auto; margin-bottom: -72px; object-fit: contain; }
+.guarantee > div { max-width: 700px; }
+.guarantee h2 { margin-bottom: 12px; text-align: center; color: var(--text-title); }
+.guarantee p { color: var(--text-muted); }
+.guarantee p:last-child { margin: 0; }
+
+/* SEÇÃO 8 — FAQ */
+#faq-section { background: var(--bg-ice-blue); }
+.faq { border-top: 1px solid var(--border-soft); }
+.faq-item { border-bottom: 1px solid var(--border-soft); }
+.faq-item > button {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 24px 0;
+  border: 0;
+  background: transparent;
+  color: var(--text-title);
+  font-weight: 600;
+  text-align: left;
+  transition: color .2s;
+}
+.faq-item > button:hover {
+  color: var(--brand-primary-dark);
+}
+.faq-item > button svg { flex: none; color: var(--brand-primary-dark); }
+.faq-item > div p { padding: 0 40px 24px 0; color: var(--text-muted); }
+
+/* RODAPÉ */
+footer {
+  padding-block: 48px;
+  border-top: 1px solid var(--blue-deep);
+  background: var(--blue-navy);
+  text-align: center;
+  color: #FFFFFF;
+}
+footer strong { color: #FFFFFF; }
+footer p { margin: 8px 0; color: #8BB0C4; }
+footer nav { display: flex; justify-content: center; gap: 16px; }
+footer a { color: var(--bg-ice-blue); text-decoration: underline; text-underline-offset: 3px; }
+footer a:hover { color: #FFFFFF; }
+
+/* MODAL DE UPSELL / UPGRADE */
+.modal-backdrop {
+  position: fixed;
+  z-index: 50;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  overflow-y: auto;
+  padding: 24px;
+  background: var(--background-overlay);
+}
+.modal {
+  position: relative;
+  width: min(100%, 620px);
+  max-height: calc(100vh - 48px);
+  overflow-y: auto;
+  padding: 40px;
+  border-radius: 16px;
+  background: #FFFFFF;
+  box-shadow: 0 30px 80px rgba(7, 29, 48, 0.4);
+  text-align: center;
+}
+.modal > .eyebrow { justify-content: center; padding-inline: 48px; font-size: 24px; line-height: 1.2; color: var(--brand-primary-dark); }
+.modal h2 { margin-top: 24px; margin-bottom: 24px; color: var(--text-title); }
+.modal p { color: var(--text-muted); }
+.modal .feature-list { text-align: left; }
+.modal .button { display: flex; margin-inline: auto; }
+.modal .button + .button { margin-top: 16px; }
+.close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  display: grid;
+  width: 44px;
+  height: 44px;
+  place-items: center;
+  border: 0;
+  border-radius: 50%;
+  background: var(--bg-ice-blue);
+  color: var(--text-navy);
+  transition: background-color .2s;
+}
+.close:hover {
+  background: #DCEEF8;
+}
+
+@media (min-width: 1024px) {
+  .hero-media { width: min(50%, 520px); }
+  .offers { align-items: start; }
+}
+@media (max-width: 1023px) {
+  h1 { font-size: 36px; }
+  .section { padding-block: 80px; }
+  .card-grid { grid-template-columns: repeat(2, 1fr); }
+  .carousel { grid-auto-columns: calc((100% - 96px)/5); }
+}
+@media (max-width: 767px) {
+  .container { padding-inline: 24px; }
+  h1 { font-size: 24px; font-weight: 900; }
+  h2 { margin-bottom: 32px; font-size: 20px; font-weight: 900; }
+  .section { padding-block: 64px; }
+  .hero { padding-block: 40px 64px; }
+  .hero-media { width: 100%; }
+  .card-grid, .offers { grid-template-columns: 1fr; }
+  .carousel { grid-auto-columns: 75%; gap: 16px; }
+  .offer-card.featured { grid-row: 2; }
+  .price strong { font-size: 28px; }
+  .guarantee-seal { width: min(100%, 300px); margin-bottom: -48px; }
+  .guarantee h2 { margin-bottom: 12px; }
+  .modal { padding: 32px 24px; }
+}
+@media (max-width: 359px) {
+  .button { padding: 18px 24px; font-size: 18px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    scroll-behavior: auto !important;
+    animation: none !important;
+    transition: none !important;
+  }
+}

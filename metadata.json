@@ -1,0 +1,6 @@
+{
+  "name": "Matriz Low Ticket Base",
+  "description": "Template de landing page de alta conversão para produtos digitais low-ticket.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
