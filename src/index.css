@@ -422,6 +422,12 @@ footer a:hover { color: #FFFFFF; }
   background: #DCEEF8;
 }
 
+/* Performance & Mobile-First Render Optimizations */
+#results-section, #modules-section, #bonus-section, #guarantee-section, #faq-section {
+  content-visibility: auto;
+  contain-intrinsic-size: 1px 700px;
+}
+
 @media (min-width: 1024px) {
   .hero-media { width: min(50%, 520px); }
   .offers { align-items: start; }
@@ -433,22 +439,39 @@ footer a:hover { color: #FFFFFF; }
   .carousel { grid-auto-columns: calc((100% - 96px)/5); }
 }
 @media (max-width: 767px) {
-  .container { padding-inline: 24px; }
-  h1 { font-size: 24px; font-weight: 900; }
-  h2 { margin-bottom: 32px; font-size: 20px; font-weight: 900; }
-  .section { padding-block: 64px; }
-  .hero { padding-block: 40px 64px; }
-  .hero-media { width: 100%; }
-  .card-grid, .offers { grid-template-columns: 1fr; }
-  .carousel { grid-auto-columns: 75%; gap: 16px; }
-  .offer-card.featured { grid-row: 2; }
+  .container { padding-inline: 16px; }
+  h1 { font-size: 24px; font-weight: 900; line-height: 1.25; }
+  h2 { margin-bottom: 24px; font-size: 20px; font-weight: 900; line-height: 1.3; }
+  .section { padding-block: 48px; }
+  .hero { padding-block: 32px 48px; }
+  .hero-media { width: 100%; max-width: 480px; }
+  .hero .lead { font-size: 16px; margin-bottom: 24px; padding-inline: 4px; }
+  .button {
+    min-height: 48px;
+    padding: 16px 20px;
+    font-size: 17px;
+  }
+  .card-grid, .offers { grid-template-columns: 1fr; gap: 16px; }
+  .carousel {
+    grid-auto-columns: 78%;
+    gap: 14px;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+  }
+  .result-card, .activity-card {
+    scroll-snap-align: center;
+  }
+  .offer-card { padding: 24px 20px; }
+  .offer-card.featured { grid-row: 2; padding-block: 36px; }
   .price strong { font-size: 28px; }
-  .guarantee-seal { width: min(100%, 300px); margin-bottom: -48px; }
+  .guarantee-seal { width: min(100%, 260px); margin-bottom: -36px; }
   .guarantee h2 { margin-bottom: 12px; }
-  .modal { padding: 32px 24px; }
+  .modal { padding: 28px 20px; }
 }
 @media (max-width: 359px) {
-  .button { padding: 18px 24px; font-size: 18px; }
+  .container { padding-inline: 12px; }
+  .button { padding: 14px 18px; font-size: 16px; }
+  .carousel { grid-auto-columns: 85%; gap: 10px; }
 }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }

@@ -9,17 +9,35 @@ interface LandingPageProps {
   links: LinksConfig;
 }
 
+const getDimensions = (ratio?: string) => {
+  switch (ratio) {
+    case '3:2':
+      return { width: 960, height: 640 };
+    case '3:4':
+      return { width: 600, height: 800 };
+    case '2:3':
+      return { width: 600, height: 900 };
+    case '1:1':
+    default:
+      return { width: 600, height: 600 };
+  }
+};
+
 const placeholder = (
   item: MediaItem,
   priority = false,
   fit: 'cover' | 'contain' = 'cover',
-) =>
-  item.src ? (
+) => {
+  const dims = getDimensions(item.ratio);
+  return item.src ? (
     <img
       src={item.src}
       alt={item.alt}
+      width={dims.width}
+      height={dims.height}
       loading={priority ? 'eager' : 'lazy'}
       fetchPriority={priority ? 'high' : 'auto'}
+      decoding="async"
       className={`w-full h-full ${fit === 'contain' ? 'object-contain' : 'object-cover'}`}
     />
   ) : (
@@ -37,6 +55,7 @@ const placeholder = (
       </small>
     </div>
   );
+};
 
 function Button({
   children,
@@ -446,8 +465,11 @@ export function LandingPage({ content, theme, links }: LandingPageProps) {
                 <img
                   src={content.hero.securityImage}
                   alt={content.hero.securityImageAlt}
+                  width="320"
+                  height="44"
+                  decoding="async"
                   className="w-full h-auto mt-3"
-                  loading="eager"
+                  loading="lazy"
                 />
               )}
             </div>
@@ -532,6 +554,9 @@ export function LandingPage({ content, theme, links }: LandingPageProps) {
                     <img
                       src={content.offersSection.paymentSecurityImage}
                       alt={content.offersSection.paymentSecurityAlt}
+                      width="280"
+                      height="40"
+                      decoding="async"
                       loading="lazy"
                     />
                   )}
@@ -566,6 +591,9 @@ export function LandingPage({ content, theme, links }: LandingPageProps) {
                     <img
                       src={content.offersSection.paymentSecurityImage}
                       alt={content.offersSection.paymentSecurityAlt}
+                      width="280"
+                      height="40"
+                      decoding="async"
                       loading="lazy"
                     />
                   )}
@@ -583,6 +611,9 @@ export function LandingPage({ content, theme, links }: LandingPageProps) {
                 className="guarantee-seal"
                 src={content.guarantee.image}
                 alt={content.guarantee.imageAlt}
+                width="320"
+                height="320"
+                decoding="async"
                 loading="lazy"
               />
             )}

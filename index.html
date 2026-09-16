@@ -6,7 +6,14 @@
     <meta name="theme-color" content="#2d2d2d" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700&family=Montserrat:wght@900&display=swap" />
+    <!-- Non-blocking Google Fonts -->
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700&family=Montserrat:wght@900&display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700&family=Montserrat:wght@900&display=swap" media="print" onload="this.media='all'" />
+    <noscript>
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700&family=Montserrat:wght@900&display=swap" />
+    </noscript>
+    <!-- Preload LCP Image -->
+    <link rel="preload" as="image" href="/images/hero-mockup-atividades-minecraft.webp" type="image/webp" fetchpriority="high" />
     <title>Matriz Low Ticket Base</title>
     <meta name="description" content="Template de landing page de alta conversão para produtos digitais low-ticket." />
     <meta property="og:title" content="Matriz Low Ticket Base" />
