@@ -16,12 +16,32 @@ export const pageContent: PageContent = {
   },
   results: {
     title: 'Veja o que pais e mães estão falando depois de apresentar aos filhos uma maneira muito mais divertida de praticar o que aprendem na escola.',
-    items: Array.from({ length: 6 }, (_, index) => ({
-      src: '',
-      alt: `Depoimento de pais e mães ${String(index + 1).padStart(2, '0')}`,
-      label: `Print real ${String(index + 1).padStart(2, '0')}`,
-      ratio: '2:3' as const,
-    })),
+    items: [
+      {
+        src: '/images/resultado-01.webp',
+        alt: 'Depoimento de mãe sobre as atividades de Minecraft 01',
+        label: 'Depoimento 01',
+        ratio: '2:3',
+      },
+      {
+        src: '/images/resultado-02.webp',
+        alt: 'Depoimento de pais elogiando o aprendizado com Minecraft 02',
+        label: 'Depoimento 02',
+        ratio: '2:3',
+      },
+      {
+        src: '/images/resultado-03.webp',
+        alt: 'Feedback positivo da evolução da criança com o kit 03',
+        label: 'Depoimento 03',
+        ratio: '2:3',
+      },
+      {
+        src: '/images/resultado-04.webp',
+        alt: 'Relato de família com o caderno de atividades Minecraft 04',
+        label: 'Depoimento 04',
+        ratio: '2:3',
+      },
+    ],
   },
   modulesSection: {
     title: 'UM MUNDO DE DESAFIOS PARA SEU FILHO EXPLORAR FORA DAS TELAS',
