@@ -377,6 +377,21 @@ function UpgradeModal({
   );
 }
 
+function renderHeroHeadline(headline: string) {
+  const target = '+147 ATIVIDADES ESCOLARES COM MINECRAFT';
+  if (headline.includes(target)) {
+    const parts = headline.split(target);
+    return (
+      <>
+        {parts[0]}
+        <span className="hero-highlight">{target}</span>
+        {parts.slice(1).join(target)}
+      </>
+    );
+  }
+  return headline;
+}
+
 export function LandingPage({ content, theme, links }: LandingPageProps) {
   const [modalOpen, setModalOpen] = useState(false);
   const [faqOpen, setFaqOpen] = useState<number | null>(0);
@@ -416,7 +431,7 @@ export function LandingPage({ content, theme, links }: LandingPageProps) {
                 'contain',
               )}
             </div>
-            <h1 id="hero-headline">{content.hero.headline}</h1>
+            <h1 id="hero-headline">{renderHeroHeadline(content.hero.headline)}</h1>
             <p className="lead" id="hero-subheadline">
               {content.hero.body}
             </p>
