@@ -12,14 +12,14 @@ interface LandingPageProps {
 const getDimensions = (ratio?: string) => {
   switch (ratio) {
     case '3:2':
-      return { width: 960, height: 640 };
+      return { width: 720, height: 480 };
     case '3:4':
-      return { width: 600, height: 800 };
+      return { width: 420, height: 560 };
     case '2:3':
-      return { width: 600, height: 900 };
+      return { width: 480, height: 720 };
     case '1:1':
     default:
-      return { width: 600, height: 600 };
+      return { width: 480, height: 480 };
   }
 };
 
@@ -162,18 +162,27 @@ function Carousel({
 }) {
   const ref = useRef<HTMLDivElement>(null);
   const items = [...originalItems, ...originalItems, ...originalItems];
-  const segmentWidth = () => (ref.current?.scrollWidth ?? 0) / 3;
 
   useEffect(() => {
     const element = ref.current;
     if (!element) return;
-    const initialize = () => element.scrollTo({ left: segmentWidth() });
+
+    let segment = element.scrollWidth / 3;
+    const initialize = () => {
+      segment = element.scrollWidth / 3;
+      if (segment > 0) {
+        element.scrollLeft = segment;
+      }
+    };
     initialize();
 
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduceMotion) return;
+
     let frame = 0;
     let previousTime = performance.now();
     let isPaused = false;
+    let isVisible = false;
 
     const onPause = () => {
       isPaused = true;
@@ -184,20 +193,38 @@ function Carousel({
     };
 
     const animate = (time: number) => {
-      const segment = segmentWidth();
-      if (segment && !isPaused) {
-        element.scrollLeft += ((time - previousTime) / 1000) * 75;
-        if (element.scrollLeft >= segment * 2) element.scrollLeft -= segment;
-        if (element.scrollLeft <= 0) element.scrollLeft += segment;
+      if (!isPaused && isVisible && segment > 0) {
+        const delta = Math.min((time - previousTime) / 1000, 0.1);
+        let next = element.scrollLeft + delta * 50;
+        if (next >= segment * 2) {
+          next -= segment;
+        } else if (next <= 0) {
+          next += segment;
+        }
+        element.scrollLeft = next;
       }
       previousTime = time;
       frame = window.requestAnimationFrame(animate);
     };
 
-    const observer = new ResizeObserver(initialize);
-    observer.observe(element);
-    if (!reduceMotion) frame = window.requestAnimationFrame(animate);
-    window.addEventListener('resize', initialize);
+    const resizeObserver = new ResizeObserver(() => {
+      segment = element.scrollWidth / 3;
+    });
+    resizeObserver.observe(element);
+
+    const intersectionObserver = new IntersectionObserver(
+      ([entry]) => {
+        isVisible = entry.isIntersecting;
+        if (isVisible) {
+          previousTime = performance.now();
+        }
+      },
+      { threshold: 0.05 }
+    );
+    intersectionObserver.observe(element);
+
+    frame = window.requestAnimationFrame(animate);
+
     element.addEventListener('mouseenter', onPause);
     element.addEventListener('mouseleave', onResume);
     element.addEventListener('touchstart', onPause, { passive: true });
@@ -205,8 +232,8 @@ function Carousel({
 
     return () => {
       if (frame) window.cancelAnimationFrame(frame);
-      observer.disconnect();
-      window.removeEventListener('resize', initialize);
+      resizeObserver.disconnect();
+      intersectionObserver.disconnect();
       element.removeEventListener('mouseenter', onPause);
       element.removeEventListener('mouseleave', onResume);
       element.removeEventListener('touchstart', onPause);
