@@ -340,14 +340,14 @@ function UpgradeModal({
         >
           <X className="w-5 h-5" />
         </button>
-        <span className="eyebrow">{offers.popup.eyebrow}</span>
-        <p className="mt-2 text-[var(--text-muted)]">{offers.popup.message}</p>
-        <h2 id="modal-title" className="text-2xl font-bold mt-3 mb-4">
+        {offers.popup.eyebrow ? <span className="eyebrow">{offers.popup.eyebrow}</span> : null}
+        {offers.popup.message ? <p className="mt-2 text-[var(--text-muted)]">{offers.popup.message}</p> : null}
+        <h2 id="modal-title" className="modal-title">
           {offers.popup.title}
         </h2>
         <FeatureList items={offers.complete.items} />
         <Price data={offers.popup} />
-        <div className="flex flex-col gap-3 mt-4">
+        <div className="modal-actions">
           <Button
             id="btn-upgrade-modal-cta"
             href={links.checkoutUpgrade ? withAttributionParams(links.checkoutUpgrade) : undefined}
